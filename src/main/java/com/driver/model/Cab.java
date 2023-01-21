@@ -14,6 +14,7 @@ public class Cab {
 
     private boolean available;
 
+
     @OneToOne
     @JoinColumn
     private Driver driver;

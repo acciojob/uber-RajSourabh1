@@ -22,6 +22,9 @@ public class Customer {
         this.mobile = mobile;
         this.password = password;
     }
+    public Customer(){
+
+    }
 
     public int getCustomerId() {
         return customerId;
