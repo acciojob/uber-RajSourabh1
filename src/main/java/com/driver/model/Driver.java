@@ -8,7 +8,7 @@ import java.util.List;
 public class Driver {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.Auto)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int driverId;
 
     private String mobile;
