@@ -54,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
 		   }
 	   }
 
-	   if(min < Integer.MAX_VALUE){
+	   if(min < Integer.MAX_VALUE && driver1!=null){
 		   Customer customer = customerRepository2.findById(customerId).get();
 
 		   TripBooking tripBooking = new TripBooking();
