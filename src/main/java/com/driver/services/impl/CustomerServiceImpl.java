@@ -45,28 +45,31 @@ public class CustomerServiceImpl implements CustomerService {
 		//Avoid using SQL query
        List<Driver> drivers = driverRepository2.findAll();
 	   int min = Integer.MAX_VALUE;
+	   Driver driver1 = null;
+
 	   for(Driver driver:drivers){
-		   if(driver.getCab().getAvailable() && driver.getDriverId()<min)
+		   if(driver.getCab().getAvailable() && driver.getDriverId()<min){
 			   min = driver.getDriverId();
+			   driver1 = driver;
+		   }
 	   }
 
 	   if(min < Integer.MAX_VALUE){
-		   Driver driver = driverRepository2.findById(min).get();
 		   Customer customer = customerRepository2.findById(customerId).get();
 
 		   TripBooking tripBooking = new TripBooking();
-		   int bill = driver.getCab().getPerKmRate() * distanceInKm;
+		   int bill = driver1.getCab().getPerKmRate() * distanceInKm;
 
 		   tripBooking.setCustomer(customer);
-		   tripBooking.setDriver(driver);
+		   tripBooking.setDriver(driver1);
 		   tripBooking.setFromLocation(fromLocation);
 		   tripBooking.setToLocation(toLocation);
 		   tripBooking.setDistanceInKm(distanceInKm);
 		   tripBooking.setBill(bill);
 		   tripBooking.setStatus(TripStatus.CONFIRMED);
 
-		   driver.getTripBookingList().add(tripBooking);
-		   driver.getCab().setAvailable(false);
+		   driver1.getTripBookingList().add(tripBooking);
+		   driver1.getCab().setAvailable(false);
 
 		   customer.getTripBookings().add(tripBooking);
 
